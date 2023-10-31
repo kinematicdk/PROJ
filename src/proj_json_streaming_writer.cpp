@@ -36,6 +36,7 @@
 #include <string.h>
 #include <sqlite3.h>
 #include <stdarg.h>
+#include <cstdint>
 #include <cmath>
 #define CPLAssert(x) do {} while(0)
 #define CPLIsNan     std::isnan
