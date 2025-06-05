@@ -77,6 +77,7 @@ Thomas Knudsen, thokn@sdfe.dk, 2016-05-25/2017-10-26
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include "stdint.h"
 
 #include <fstream> // std::ifstream
 #include <iostream>
