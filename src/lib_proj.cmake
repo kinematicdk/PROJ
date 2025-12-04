@@ -459,7 +459,7 @@ endif()
 if(TIFF_ENABLED)
   target_compile_definitions(proj PRIVATE -DTIFF_ENABLED)
   target_include_directories(proj PRIVATE ${TIFF_INCLUDE_DIR})
-  target_link_libraries(proj PRIVATE ${TIFF_LIBRARY})
+  target_link_libraries(proj PUBLIC TIFF::TIFF)
 endif()
 
 if(CURL_ENABLED)
