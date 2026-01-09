@@ -195,12 +195,25 @@ option(ENABLE_TIFF "Enable TIFF support to read some grids" ON)
 mark_as_advanced(ENABLE_TIFF)
 set(TIFF_ENABLED FALSE)
 if(ENABLE_TIFF)
-  find_package(TIFF REQUIRED)
-  if(TIFF_FOUND)
+  if(TIFF_INCLUDE_DIR AND TIFF_LIBRARY)
+    # Use manually specified TIFF paths (skip find_package)
+    set(TIFF_FOUND TRUE)
     set(TIFF_ENABLED TRUE)
+    # Create imported target manually
+    if(NOT TARGET TIFF::TIFF)
+      add_library(TIFF::TIFF UNKNOWN IMPORTED)
+      set_target_properties(TIFF::TIFF PROPERTIES
+        IMPORTED_LOCATION "${TIFF_LIBRARY}"
+        INTERFACE_INCLUDE_DIRECTORIES "${TIFF_INCLUDE_DIR}")
+    endif()
   else()
-    message(SEND_ERROR
-      "libtiff dependency not found! Use ENABLE_TIFF=OFF to force it off")
+    find_package(TIFF REQUIRED)
+    if(TIFF_FOUND)
+      set(TIFF_ENABLED TRUE)
+    else()
+      message(SEND_ERROR
+        "libtiff dependency not found! Use ENABLE_TIFF=OFF to force it off")
+    endif()
   endif()
 else()
   message(WARNING
