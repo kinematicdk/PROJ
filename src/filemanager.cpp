@@ -60,6 +60,7 @@
 #endif
 
 #ifdef _WIN32
+#include <cstdint>
 #include <shlobj.h>
 #include <windows.h>
 #else
